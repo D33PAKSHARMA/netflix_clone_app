@@ -5,16 +5,20 @@ import { UserAuth } from "../context/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { user, logIn } = UserAuth();
   const Navigate = useNavigate();
 
   const handleSubmt = async (e) => {
     e.preventDefault();
+    setError("");
     try {
       await logIn(email, password);
+
       Navigate("/");
     } catch (error) {
       console.log(error);
+      setError(error.message);
     }
   };
   return (
@@ -30,6 +34,7 @@ const Login = () => {
           <div className="max-w-[450px] h-[600px] bg-black/75 mx-auto text-white">
             <div className="max-w-[320px] mx-auto py-16">
               <h1 className="text-3xl font-bold">Sign In</h1>
+              {error ? <p className="p-3 mt-3 bg-red-400">{error}</p> : null}
               <form onSubmit={handleSubmt} className="flex flex-col py-6">
                 <input
                   onChange={(e) => setEmail(e.target.value)}

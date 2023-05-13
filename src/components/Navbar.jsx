@@ -19,7 +19,7 @@ const Navbar = () => {
     <div className="flex items-center justify-between h-16 w-full absolute cursor-pointer z-[100]">
       <Link to="/">
         <img
-          className="h-12 ml-8 mt-6"
+          className="h-10 ml-3 mt-4 md:h-12 md:ml-8"
           src="/images/Netflix_logo.png"
           alt="Netflix_logo"
         />

@@ -5,14 +5,19 @@ import { UserAuth } from "../context/AuthContext";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [error, setError] = useState("");
   const { user, signUp } = UserAuth();
   const Navigate = useNavigate();
 
-  const handleSubmt = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp(email, password);
-      Navigate("/");
+      if (password.length < 6) {
+        alert("Password must be greater than 6 digit");
+      } else {
+        await signUp(email, password);
+        Navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +35,8 @@ const Signup = () => {
           <div className="max-w-[450px] h-[600px] bg-black/75 mx-auto text-white">
             <div className="max-w-[320px] mx-auto py-16">
               <h1 className="text-3xl font-bold">Sign Up</h1>
-              <form onSubmit={handleSubmt} className="flex flex-col py-6">
+
+              <form onSubmit={handleSubmit} className="flex flex-col py-6">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   className="p-4 rounded my-2 bg-gray-700"
